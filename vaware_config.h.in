@@ -1,0 +1,6 @@
+// the configured options and settings for vaware
+#define VAware_VERSION_MAJOR @VAware_VERSION_MAJOR@
+#define VAware_VERSION_MINOR @VAware_VERSION_MINOR@
+#define VAware_VERSION_PATCH @VAware_VERSION_PATCH@
+#define VAware_VERSION "@VAware_VERSION@"
+    

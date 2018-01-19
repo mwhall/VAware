@@ -3,14 +3,10 @@
 #include <thread>
 #include <iostream> 
 #include <fstream>
+#include "vaware_config.h"
 #include <seqan/seq_io.h>
 #include <seqan/align.h>
 #include <seqan/arg_parse.h>
-
-// **************************************************************************
-// TODO:
-//   - Hook into Mason to provide some noising of the inserts
-// **************************************************************************
 
 using namespace seqan;
 
@@ -112,9 +108,8 @@ void printPreamble(CharString& seqFileName, CharString& alignFileName,
                    bool excludePrimers, int k, int nThreads)
 {
 // Print to stdout the selected parameters
-// TODO: Figure out where the version numbering is maintained for Seqan apps
     std::cout << "########################################################" << std::endl;
-    std::cout << "# vaware Version: 0.1" << std::endl;
+    std::cout << "# vaware Version: " << VAware_VERSION << std::endl;
     std::cout << "# Reference File (input): " << seqFileName << std::endl;
     std::cout << "# Alignment File (output): ";
     (alignFileName != "NULL") ? (std::cout << alignFileName) : (std::cout << "not output");
@@ -312,6 +307,14 @@ int main(int argc, char const ** argv)
 
     ArgumentParser parser("vaware");
 
+    // Version and Descriptions
+    setVersion(parser, VAware_VERSION);
+    setShortDescription(parser, "PCR primer alignment tool");
+    setDate(parser, "January 2018");
+    addDescription(parser, "Tool to analyse the alignment of specified PCR "
+                           "primer pairs against a specified sequence file");
+    addUsageLine(parser, "\\fI-i INPUT_FASTA\\fP \\fI-f FWD_PRIMER_SEQ\\fP \\fI-r REV_PRIMER_SEQ\\fP [\\fIOPTIONS\\fP]");
+
     // Threading
     addOption(parser, ArgParseOption(
         "t", "nthreads", "Number of threads to use.",
@@ -322,6 +325,8 @@ int main(int argc, char const ** argv)
     addOption(parser, ArgParseOption(
         "i", "input-file", "Path to the input reference FASTA file.",
         ArgParseArgument::INPUT_FILE, "IN"));
+    setRequired(parser, "i");
+
     addOption(parser, ArgParseOption(
         "a", "align-file", "Path to the optional alignment output file.",
         ArgParseArgument::OUTPUT_FILE, "OUT"));
@@ -335,9 +340,11 @@ int main(int argc, char const ** argv)
     addOption(parser, ArgParseOption(
         "f", "forward-primer", "Forward primer sequence in 5'-3' orientation (can include degeneracy).",
         ArgParseArgument::STRING, "STRING"));
+    setRequired(parser, "f");
     addOption(parser, ArgParseOption(
         "r", "reverse-primer", "Reverse primer sequence in 5'-3' orientation (can include degeneracy).",
         ArgParseArgument::STRING, "STRING"));
+    setRequired(parser, "r");
     addOption(parser, ArgParseOption(
         "x", "exclude-primers", "Exclude primer sequences from insert output."));
 
