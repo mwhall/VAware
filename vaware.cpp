@@ -3,6 +3,7 @@
 #include <thread>
 #include <iostream> 
 #include <fstream>
+#include "vaware_config.h"
 #include <seqan/seq_io.h>
 #include <seqan/align.h>
 #include <seqan/arg_parse.h>
@@ -312,6 +313,14 @@ int main(int argc, char const ** argv)
 
     ArgumentParser parser("vaware");
 
+    // Version and Descriptions
+    setVersion(parser, VAware_VERSION);
+    setShortDescription(parser, "PCR primer alignment tool");
+    setDate(parser, "January 2018");
+    addDescription(parser, "Tool to analyse the alignment of specified PCR "
+                           "primer pairs against a specified sequence file");
+    addUsageLine(parser, "\\fI-i INPUT_FASTA\\fP \\fI-f FWD_PRIMER_SEQ\\fP \\fI-r REV_PRIMER_SEQ\\fP [\\fIOPTIONS\\fP]");
+
     // Threading
     addOption(parser, ArgParseOption(
         "t", "nthreads", "Number of threads to use.",
@@ -344,7 +353,6 @@ int main(int argc, char const ** argv)
     setRequired(parser, "r");
     addOption(parser, ArgParseOption(
         "x", "exclude-primers", "Exclude primer sequences from insert output."));
-    setRequired(parser, "x");
 
     // Other options
     addOption(parser, ArgParseOption(
