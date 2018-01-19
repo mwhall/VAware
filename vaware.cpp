@@ -8,11 +8,6 @@
 #include <seqan/align.h>
 #include <seqan/arg_parse.h>
 
-// **************************************************************************
-// TODO:
-//   - Hook into Mason to provide some noising of the inserts
-// **************************************************************************
-
 using namespace seqan;
 
 // ==========================================================================
@@ -113,9 +108,8 @@ void printPreamble(CharString& seqFileName, CharString& alignFileName,
                    bool excludePrimers, int k, int nThreads)
 {
 // Print to stdout the selected parameters
-// TODO: Figure out where the version numbering is maintained for Seqan apps
     std::cout << "########################################################" << std::endl;
-    std::cout << "# vaware Version: 0.1" << std::endl;
+    std::cout << "# vaware Version: " << VAware_VERSION << std::endl;
     std::cout << "# Reference File (input): " << seqFileName << std::endl;
     std::cout << "# Alignment File (output): ";
     (alignFileName != "NULL") ? (std::cout << alignFileName) : (std::cout << "not output");
