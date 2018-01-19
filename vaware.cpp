@@ -322,6 +322,8 @@ int main(int argc, char const ** argv)
     addOption(parser, ArgParseOption(
         "i", "input-file", "Path to the input reference FASTA file.",
         ArgParseArgument::INPUT_FILE, "IN"));
+    setRequired(parser, "i");
+
     addOption(parser, ArgParseOption(
         "a", "align-file", "Path to the optional alignment output file.",
         ArgParseArgument::OUTPUT_FILE, "OUT"));
@@ -335,11 +337,14 @@ int main(int argc, char const ** argv)
     addOption(parser, ArgParseOption(
         "f", "forward-primer", "Forward primer sequence in 5'-3' orientation (can include degeneracy).",
         ArgParseArgument::STRING, "STRING"));
+    setRequired(parser, "f");
     addOption(parser, ArgParseOption(
         "r", "reverse-primer", "Reverse primer sequence in 5'-3' orientation (can include degeneracy).",
         ArgParseArgument::STRING, "STRING"));
+    setRequired(parser, "r");
     addOption(parser, ArgParseOption(
         "x", "exclude-primers", "Exclude primer sequences from insert output."));
+    setRequired(parser, "x");
 
     // Other options
     addOption(parser, ArgParseOption(
