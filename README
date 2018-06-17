@@ -1,0 +1,13 @@
+# Installation
+
+If on Debian/Ubuntu, first install `libseqan2-dev`. See http://seqan.readthedocs.io/en/master/Infrastructure/Use/Install.html for other operating systems.
+
+In the root directory of the repository, run:
+
+```
+mkdir build
+
+cmake ..
+
+make
+```
