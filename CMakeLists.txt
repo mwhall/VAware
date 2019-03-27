@@ -20,6 +20,6 @@ find_package(Threads REQUIRED)
 find_package(SeqAn REQUIRED)
 
 # build
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${SEQAN_CXX_FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${SEQAN_CXX_FLAGS} -DSEQAN_DISABLE_VERSION_CHECK=YES")
 add_executable(vaware vaware.cpp)
 target_link_libraries(vaware ${SEQAN_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
