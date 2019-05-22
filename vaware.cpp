@@ -409,6 +409,9 @@ int main(int argc, char const ** argv)
 
     SeqFileIn seqFileIn(toCString(seqFileName));
 
+    //Close seqFileIn to avoid error once it reopens
+    close(seqFileIn);
+    
     if (!open(seqFileIn, toCString(seqFileName)))
     {
         std::cerr << "ERROR: Could not open the reference file." << std::endl;
